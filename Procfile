@@ -1,0 +1,1 @@
+web: java -jar build/libs/time-sheet-0.0.1-SNAPSHOT.jar
