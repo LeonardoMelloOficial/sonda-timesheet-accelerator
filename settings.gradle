@@ -1,0 +1,21 @@
+pluginManagement {
+
+	repositories {
+
+
+		maven {
+			name = 'Nexus'
+			url = 'http://sbr00xs0089:8082/repository/maven-public/'
+			//url='http://repo.spring.io/libs-release'
+		}
+
+		/*maven{
+			name = 'maven2'
+			url='http://repo.spring.io/libs-release'
+		}*/
+		
+		
+		gradlePluginPortal()
+	}
+}
+rootProject.name = 'time-sheet'
