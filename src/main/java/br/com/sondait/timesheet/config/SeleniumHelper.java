@@ -31,6 +31,12 @@ public class SeleniumHelper {
     }
 
     static private String findFile(String filename) {
+
+        String chromeDriverPath = System.getProperty("CHROMEDRIVER_PATH");
+        if (chromeDriverPath!=null){
+            return chromeDriverPath;
+        }
+
         String paths[] = { "", "bin/", "target/classes" }; 
                                                            
         for (String path : paths) {
