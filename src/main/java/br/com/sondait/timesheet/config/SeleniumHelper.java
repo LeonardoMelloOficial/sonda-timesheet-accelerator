@@ -27,7 +27,7 @@ public class SeleniumHelper {
 
     static {
         // System.setProperty("webdriver.gecko.driver", findFile("geckodriver.mac"));
-        System.setProperty("webdriver.chrome.driver", findFile("chromedriver.exe"));
+        // System.setProperty("webdriver.chrome.driver", findFile("chromedriver.exe"));
     }
 
     static private String findFile(String filename) {
