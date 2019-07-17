@@ -27,7 +27,7 @@ public class SeleniumHelper {
 
     static {
         // System.setProperty("webdriver.gecko.driver", findFile("geckodriver.mac"));
-        String chromeDriverPath = System.getProperty("CHROMEDRIVER_PATH");
+        String chromeDriverPath = System.getProperty("webdriver.chrome.driver");
         if (chromeDriverPath != null) {
             System.setProperty("webdriver.chrome.driver", findFile("chromedriver.exe"));
         }
