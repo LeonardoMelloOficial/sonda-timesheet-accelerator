@@ -27,15 +27,13 @@ public class SeleniumHelper {
 
     static {
         // System.setProperty("webdriver.gecko.driver", findFile("geckodriver.mac"));
-        // System.setProperty("webdriver.chrome.driver", findFile("chromedriver.exe"));
+        String chromeDriverPath = System.getProperty("CHROMEDRIVER_PATH");
+        if (chromeDriverPath != null) {
+            System.setProperty("webdriver.chrome.driver", findFile("chromedriver.exe"));
+        }
     }
 
     static private String findFile(String filename) {
-
-        String chromeDriverPath = System.getProperty("CHROMEDRIVER_PATH");
-        if (chromeDriverPath!=null){
-            return chromeDriverPath;
-        }
 
         String paths[] = { "", "bin/", "target/classes" }; 
                                                            
