@@ -1,0 +1,84 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Application built to accelerate the time recording process of Sonda employees. It consists of providing one endpoint where employees inform their userId/password and the system do the time registry.",
+    "version": "1.0.0",
+    "title": "Sonda Timesheet Accelerator",
+    "contact": {
+      "email": "leo@leonardomello.com"
+    }
+  },
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/register": {
+      "post": {
+        "tags": [
+          "Register time"
+        ],
+        "summary": "Register a time entry in timesheet",
+        "operationId": "registerTime",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "userId",
+            "description": "The user id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "description": "The user password",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "action",
+            "type": "string",
+            "description": "The action (ponto or intervalo)",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registred",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "400": {
+            "description": "Bad request if any wrong parameters"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Result": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "enum": [
+            true
+          ]
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
