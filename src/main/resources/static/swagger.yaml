@@ -16,9 +16,8 @@ paths:
       summary: Register a time entry in timesheet
       operationId: registerTime
       consumes:
-      - "application/x-www-form-urlencoded"
+      - "multipart/form-data"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
         - in: "formData"

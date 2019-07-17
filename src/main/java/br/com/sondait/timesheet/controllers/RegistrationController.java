@@ -55,7 +55,7 @@ public class RegistrationController {
 
             driver.get(url.toString());
 
-            System.out.println(driver.getPageSource());
+            // System.out.println(driver.getPageSource());
 
             driver.findElement(By.id("createNewPoint")).click();
 
