@@ -69,6 +69,8 @@ public class RegistrationController {
 
             driver.findElement(By.id("Save")).click();
 
+            driver.close();
+            
             retorno.put("success", "true");
             // retorno.put("code", driver.getPageSource());
 

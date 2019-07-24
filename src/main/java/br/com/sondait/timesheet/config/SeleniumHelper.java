@@ -12,11 +12,6 @@ public class SeleniumHelper {
     private WebDriver driver;
 
     public SeleniumHelper() {
-        // Capabilities capabilities = DesiredCapabilities.firefox();
-        // driver = new FirefoxDriver(capabilities);
-        // this.driver = new
-        // JBrowserDriver(Settings.builder().timezone(Timezone.AMERICA_DENVER).build());
-        // driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors",
@@ -26,7 +21,6 @@ public class SeleniumHelper {
     }
 
     static {
-        // System.setProperty("webdriver.gecko.driver", findFile("geckodriver.mac"));
         String chromeDriverPath = System.getProperty("webdriver.chrome.driver");
         if (chromeDriverPath != null) {
             System.setProperty("webdriver.chrome.driver", findFile("chromedriver.exe"));
