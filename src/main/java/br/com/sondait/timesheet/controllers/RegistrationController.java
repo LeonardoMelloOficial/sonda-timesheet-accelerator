@@ -69,6 +69,8 @@ public class RegistrationController {
 
             driver.findElement(By.id("Save")).click();
 
+            driver.wait(2000);
+
             driver.close();
             
             retorno.put("success", "true");
