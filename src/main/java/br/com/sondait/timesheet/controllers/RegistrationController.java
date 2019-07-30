@@ -3,9 +3,13 @@ package br.com.sondait.timesheet.controllers;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +48,8 @@ public class RegistrationController {
 
             WebDriver driver = helper.getDriver();
 
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
             String passwordEncoded = URLEncoder.encode(password);
 
             StringBuilder url = new StringBuilder();
@@ -66,18 +72,14 @@ public class RegistrationController {
             if ("intervalo".equals(action)) {
                 driver.findElement(By.id("mealImage")).click();
             }
-
-            WebElement elementSave = (new WebDriverWait(driver, 10))
-               .until(ExpectedConditions.elementToBeClickable(By.id("Save")));
             
+            driver.findElement(By.id("Save")).click();
             
-            elementSave.click();
-
             //driver.wait(5000);
-
-            driver.close();
             
             retorno.put("success", "true");
+
+            driver.close();
             // retorno.put("code", driver.getPageSource());
 
             // System.out.println(driver.getPageSource());
