@@ -1,14 +1,28 @@
-version: 0.1
+version: 0.2
+
+env:
+    variables:
+        # S3_BUCKET: "forzapp-build"
+        # APP_NAME: "forzapp"
+        # BUILD_ENV : "prd"
 
 phases:
-  install:
-   commands:
-     - echo Entering install phase...
-     - echo Nothing to do now
-  build:
-    commands:
-     - echo Build started on `date`
-     - gradle build
+    install:
+        runtime-versions:
+            java: openjdk8
+    pre_build:
+        commands:
+          - echo [PHASE] Entered the pre_build phase...
+          - chmod +x ./gradlew
+      
+    build:
+        commands:
+          - echo [PHASE] Entered the build phase...
+          - ./gradlew build
+  
+    post_build:
+        commands:
+
 artifacts:
   type: war
   files:
