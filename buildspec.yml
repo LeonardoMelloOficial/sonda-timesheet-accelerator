@@ -24,6 +24,6 @@ phases:
         commands:
 
 artifacts:
-  type: war
+  type: jar
   files:
-    - 'build/libs/*.war'
+    - 'build/libs/*.jar'
