@@ -67,7 +67,11 @@ public class RegistrationController {
                 driver.findElement(By.id("mealImage")).click();
             }
 
-            driver.findElement(By.id("Save")).click();
+            WebElement elementSave = (new WebDriverWait(driver, 10))
+               .until(ExpectedConditions.elementToBeClickable(By.id("Save")));
+            
+            
+            elementSave.click();
 
             //driver.wait(5000);
 
