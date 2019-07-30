@@ -24,6 +24,6 @@ phases:
         commands:
 
 artifacts:
-  type: jar
   files:
     - 'build/libs/*.jar'
+    - 'Procfile'
