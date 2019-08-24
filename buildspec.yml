@@ -3,7 +3,7 @@ version: 0.2
 env:
     variables:
         # S3_BUCKET: "forzapp-build"
-        APP_NAME: "sonda-timesheet-accelerator"
+        APP_NAME: "timesheet-sonda"
         # BUILD_ENV : "prd"
 
 phases:
