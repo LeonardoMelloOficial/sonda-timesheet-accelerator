@@ -7,11 +7,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,82 +19,87 @@ import br.com.sondait.timesheet.config.SeleniumHelper;
 @RestController
 public class RegistrationController {
 
-    @PostMapping("/register")
-    public ResponseEntity register(@RequestParam("userId") String userId, @RequestParam("password") String password,
-            @RequestParam("action") String action) {
+	@GetMapping("/ping")
+	public ResponseEntity<String> ping() {
+		return new ResponseEntity<String>(HttpStatus.OK);
+	}
 
-        Map<String, String> retorno = new HashMap<String, String>();
-        SeleniumHelper helper = new SeleniumHelper();
+	@PostMapping("/register")
+	public ResponseEntity register(@RequestParam("userId") String userId, @RequestParam("password") String password,
+			@RequestParam("action") String action) {
 
-        try {
+		Map<String, String> retorno = new HashMap<String, String>();
+		SeleniumHelper helper = new SeleniumHelper();
 
-            if (userId == null || userId.isEmpty()) {
-                throw new RuntimeException("invalid userId");
-            }
+		try {
 
-            if (password == null || password.isEmpty()) {
-                throw new RuntimeException("invalid password");
-            }
+			if (userId == null || userId.isEmpty()) {
+				throw new RuntimeException("invalid userId");
+			}
 
-            if (action == null || action.isEmpty()) {
-                throw new RuntimeException("invalid action");
-            }
+			if (password == null || password.isEmpty()) {
+				throw new RuntimeException("invalid password");
+			}
 
-            if (!"ponto".equals(action) && !"intervalo".equals(action)) {
-                throw new RuntimeException("invalid action");
-            }
+			if (action == null || action.isEmpty()) {
+				throw new RuntimeException("invalid action");
+			}
 
-            WebDriver driver = helper.getDriver();
+			if (!"ponto".equals(action) && !"intervalo".equals(action)) {
+				throw new RuntimeException("invalid action");
+			}
 
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			WebDriver driver = helper.getDriver();
 
-            String passwordEncoded = URLEncoder.encode(password);
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-            StringBuilder url = new StringBuilder();
-            url.append("https://");
-            url.append(userId);
-            url.append(":");
-            url.append(passwordEncoded);
-            url.append("@pontoeletronico.sondait.com.br/Point/Index");
+			String passwordEncoded = URLEncoder.encode(password);
 
-            driver.get(url.toString());
+			StringBuilder url = new StringBuilder();
+			url.append("https://");
+			url.append(userId);
+			url.append(":");
+			url.append(passwordEncoded);
+			url.append("@pontoeletronico.sondait.com.br/Point/Index");
 
-            // System.out.println(driver.getPageSource());
+			driver.get(url.toString());
 
-            driver.findElement(By.id("createNewPoint")).click();
+			// System.out.println(driver.getPageSource());
 
-            if ("ponto".equals(action)) {
-                driver.findElement(By.id("pointImage")).click();
-            }
+			driver.findElement(By.id("createNewPoint")).click();
 
-            if ("intervalo".equals(action)) {
-                driver.findElement(By.id("mealImage")).click();
-            }
-            
-            driver.findElement(By.id("Save")).click();
-            
-            //driver.wait(5000);
-            
-            retorno.put("success", "true");
+			if ("ponto".equals(action)) {
+				driver.findElement(By.id("pointImage")).click();
+			}
 
-            driver.close();
-            // retorno.put("code", driver.getPageSource());
+			if ("intervalo".equals(action)) {
+				driver.findElement(By.id("mealImage")).click();
+			}
 
-            // System.out.println(driver.getPageSource());
+			driver.findElement(By.id("Save")).click();
 
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            retorno.put("success", "false");
-            if (e.getMessage() != null) {
-                retorno.put("msg", e.getMessage());
-            }
-            return new ResponseEntity<Map<String, String>>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
+			// driver.wait(5000);
 
-        }
+			retorno.put("success", "true");
 
-        // helper.navigateTo("www.google.com");
-        return new ResponseEntity<Map<String, String>>(retorno, HttpStatus.OK);
-    }
+			driver.close();
+			// retorno.put("code", driver.getPageSource());
+
+			// System.out.println(driver.getPageSource());
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			retorno.put("success", "false");
+			if (e.getMessage() != null) {
+				retorno.put("msg", e.getMessage());
+			}
+			return new ResponseEntity<Map<String, String>>(retorno, HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+
+		// helper.navigateTo("www.google.com");
+		return new ResponseEntity<Map<String, String>>(retorno, HttpStatus.OK);
+	}
 
 }
